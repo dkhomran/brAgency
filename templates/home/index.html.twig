@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+{% block body %}
+
+
+	<main>
+		<article>
+
+			<!--  #LANDING  -->
+			{% include "home/landing.html.twig" %}
+
+
+			<!-- #SERVICE  -->
+
+			{% include "home/services.html.twig" %}
+
+			<!-- #PROJECTS  -->
+
+			{% include "home/projects.html.twig" %}
+
+
+			<!-- #ABOUT  -->
+
+			{% include "home/about.html.twig" %}
+
+
+			<!-- #CTA  -->
+
+			{% include "home/cta.html.twig" %}
+
+			<!-- #BLOGS  -->
+
+			{% include "home/blog.html.twig" %}
+
+
+			<!-- #CONTACT  -->
+			{% include "home/contact.html.twig" %}
+
+
+		</article>
+	</main>
+
+
+	<!-- #BACK TO TOP  -->
+
+	<a href="#top" aria-label="back to top" data-back-top-btn class="back-top-btn">
+		<ion-icon name="chevron-up" aria-hidden="true">^</ion-icon>
+	</a>
+
+
+{% endblock %}
