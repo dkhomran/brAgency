@@ -47,7 +47,7 @@ class Projet
     #[ORM\JoinColumn(nullable: false)]
     private ?user $user = null;
 
-    #[ORM\ManyToMany(targetEntity: categorie::class, inversedBy: 'projets')]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'projets')]
     private Collection $categorie;
 
     #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Commentaire::class, orphanRemoval: true)]
@@ -201,7 +201,7 @@ class Projet
         return $this;
     }
 
-    public function removeCategorie(categorie $categorie): static
+    public function removeCategorie(Categorie $categorie): static
     {
         $this->categorie->removeElement($categorie);
 

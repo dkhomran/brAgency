@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"> {% block title %}{% endblock %}
+
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset("./assets/css/login.css") }}">
+		{% endblock %}
+	</head>
+	<body>
+		{% block body %}
+
+
+			<div class="container  animate__animated animate__jackInTheBox" id="container">
+
+				<div class="form-container sign-in-container ">
+					<form method="post">
+						<h1>Sign in</h1>
+
+						{% if app.user %}
+							<div class="mb-3">
+								You are logged in as
+								{{ app.user.userIdentifier }},
+								<a href="{{ path('app_logout') }}">Logout</a>
+							</div>
+						{% endif %}
+						<div class="social-container">
+							<a class="social">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a class="social">
+								<i class="fab fa-google-plus-g"></i>
+							</a>
+							<a class="social">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+						{% if error %}
+							<div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Email"/>
+						<input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control" autocomplete="current-password" required/>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<a href="#">Forgot your password?</a>
+						<button type="submit">Sign In</button>
+					</form>
+				</div>
+				<div class="overlay-container">
+					<div class="overlay">
+						<div class="overlay-panel overlay-left">
+							<h1>Welcome Back!</h1>
+							<p>To keep connected with us please login with your personal info</p>
+							<button type="submit" class="ghost" id="signIn">Sign In</button>
+						</div>
+						<div class="overlay-panel overlay-right">
+							<h1>Dashboard</h1>
+							<p>Enter your personal details and start configuring your web site</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		{% endblock %}
+
+		<!-- - custom js link -->
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</body>
+</html></body></html>
