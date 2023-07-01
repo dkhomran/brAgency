@@ -35,6 +35,9 @@ class Blogpost
     #[ORM\OneToMany(mappedBy: 'blogpost', targetEntity: Commentaire::class, orphanRemoval: true)]
     private Collection $commentaires;
 
+    #[ORM\Column]
+    private ?bool $location = null;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -131,6 +134,18 @@ class Blogpost
                 $commentaire->setBlogpost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isLocation(): ?bool
+    {
+        return $this->location;
+    }
+
+    public function setLocation(bool $location): static
+    {
+        $this->location = $location;
 
         return $this;
     }

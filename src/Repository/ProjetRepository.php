@@ -21,6 +21,35 @@ class ProjetRepository extends ServiceEntityRepository
         parent::__construct($registry, Projet::class);
     }
 
+
+    // show projet selected on first page
+
+    public function showProjetClientSide()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery('
+        SELECT p FROM App\Entity\Projet p
+        WHERE p.portfolio = 1
+    ');
+        $query->setMaxResults(6);
+
+        $results = $query->getResult();
+        return $results;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function save(Projet $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -39,28 +68,28 @@ class ProjetRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Projet[] Returns an array of Projet objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Projet[] Returns an array of Projet objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Projet
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Projet
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

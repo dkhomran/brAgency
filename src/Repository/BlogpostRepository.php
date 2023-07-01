@@ -21,6 +21,33 @@ class BlogpostRepository extends ServiceEntityRepository
         parent::__construct($registry, Blogpost::class);
     }
 
+
+
+    public function showBlogPostClientSide()
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            '
+                SELECT b FROM App\Entity\Blogpost b 
+                order by b.location desc
+                           
+            '
+        );
+        $query->setMaxResults(5);;
+
+        $results = $query->getResult();
+        return $results;
+    }
+
+
+
+
+
+
+
+
     public function save(Blogpost $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -39,28 +66,28 @@ class BlogpostRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Blogpost[] Returns an array of Blogpost objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Blogpost[] Returns an array of Blogpost objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('b')
+    //            ->andWhere('b.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('b.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Blogpost
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Blogpost
+    //    {
+    //        return $this->createQueryBuilder('b')
+    //            ->andWhere('b.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
